@@ -19,6 +19,13 @@ app.use(express.json());
 
 app.use(routes);
 
+app.post("/test/actuation", (request: Request, response: Response) => {
+  response.json({
+    successMessage: "O dispositivo mudou de status.",
+    deviceStatus: true,
+  });
+});
+
 app.listen(port, () => {
   console.log(`[SERVER] Running on port ${port}  🚀`);
 });
