@@ -44,7 +44,7 @@ class MqttHandler {
       console.log(`[x] Não foi possível conectar ao broker: ${error}`);
       console.log("[...] Tentando reconectar em 10 segundos");
       setTimeout(() => {
-        this.connect();
+        this.client?.reconnect();
       }, 1000 * 10);
     });
 
@@ -116,10 +116,16 @@ class MqttHandler {
 
     this.client.on("close", () => {
       console.log("[x] Conexão com o broker fechada.\n");
+      setTimeout(() => {
+        this.client?.reconnect();
+      }, 1000 * 5);
     });
 
     this.client.on("offline", () => {
       console.log("[x] Client offline.\n");
+      setTimeout(() => {
+        this.client?.reconnect();
+      }, 1000 * 5);
     });
 
     this.client.on("reconnect", () => {
