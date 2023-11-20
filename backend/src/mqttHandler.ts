@@ -58,6 +58,7 @@ class MqttHandler {
           process.env.MQTT_TOPIC_TEMPERATURE,
           process.env.MQTT_TOPIC_HUMIDITY,
           process.env.MQTT_TOPIC_GREENHOUSE_STATUS,
+          seguraai
         ],
         (error) => {
           if (error) {
